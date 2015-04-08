@@ -190,6 +190,7 @@ class TicTacToe(Game):
         moves = [(x, y) for x in range(1, h+1)
                  for y in range(1, v+1)]
         self.initial = Struct(to_move='X', utility=0, board={}, moves=moves)
+        self.terminalCounter = 0
 
     def legal_moves(self, state):
         "Legal moves are any square not yet taken."
@@ -216,7 +217,13 @@ class TicTacToe(Game):
 
     def terminal_test(self, state):
         "A state is terminal if it is won or there are no empty squares."
-        return state.utility != 0 or len(state.moves) == 0
+        if( state.utility != 0 or len(state.moves) == 0):
+            self.terminalCounter += 1
+            return True
+        return False
+
+    def getTerminalCounter(self):
+        return self.terminalCounter
 
     def display(self, state):
         board = state.board
