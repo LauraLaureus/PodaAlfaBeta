@@ -217,8 +217,10 @@ class TicTacToe(Game):
 
     def terminal_test(self, state):
         "A state is terminal if it is won or there are no empty squares."
-        if( state.utility != 0 or len(state.moves) == 0):
+        if( state.utility != 0):
             self.terminalCounter += 1
+            return True
+        elif(len(state.moves) == 0):
             return True
         return False
 
